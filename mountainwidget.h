@@ -21,10 +21,10 @@
 
 #include <QGLWidget>
 #if QT_VERSION >= 0x050400
-#ifdef Q_OS_UNIX
-  #include <QOpenGLWidget>
-  #define QT_OPENGL_WIDGET
-#endif
+#  ifdef Q_OS_UNIX
+#    include <QOpenGLWidget>
+#    define QT_OPENGL_WIDGET
+#  endif
 #endif
 
 #define NUM_BANDS 32
@@ -49,11 +49,11 @@ public:
     void addBuffer(float *left);
 
 protected:
-    virtual void initializeGL() override;
-    virtual void resizeGL(int width, int height) override;
-    virtual void paintGL() override;
+    virtual void initializeGL() override final;
+    virtual void resizeGL(int width, int height) override final;
+    virtual void paintGL() override final;
 
-    void makeLogGraph(const float * freq, float * graph);
+    void generateLogGraph(const float * freq, float * graph);
     void drawRectangle(float x1, float y1, float z1, float x2, float y2, float z2, float r, float g, float b);
     void drawBar(float x, float z, float h, float r, float g, float b);
     void drawBars();
@@ -62,7 +62,7 @@ private:
     float m_logScale[NUM_BANDS + 1];
     float m_colors[NUM_BANDS][NUM_BANDS][3];
 
-    int m_pos = 0;
+    int m_offset = 0;
     float m_angle = 25, m_angleSpeed = 0.05f;
     float m_bars[NUM_BANDS][NUM_BANDS];
 

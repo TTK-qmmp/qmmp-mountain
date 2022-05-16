@@ -1,10 +1,10 @@
+#include "mountainplugin.h"
+#include "mountainwidget.h"
+#include "inlines.h"
+
 #include <QMenu>
 #include <QTimer>
 #include <QBoxLayout>
-#include "mountainwidget.h"
-#include "mountainplugin.h"
-
-#include "inlines.h"
 
 MountainPlugin::MountainPlugin(QWidget *parent)
     : Visual(parent)
@@ -81,10 +81,11 @@ void MountainPlugin::process(float *left, float *)
 {
     const int size = QMMP_VISUAL_NODE_SIZE / 2;
     short dest_l[size];
+
     calc_freq(dest_l, left);
 
     float buffer[size];
-    for(int i=0; i<size; ++i)
+    for(int i = 0; i < size; ++i)
     {
         buffer[i] = dest_l[i] / ((QMMP_VISUAL_NODE_SIZE << 8) / (8.0 / 2));
     }
