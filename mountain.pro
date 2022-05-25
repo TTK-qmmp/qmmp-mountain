@@ -12,7 +12,7 @@ SOURCES += mountainplugin.cpp \
            mountainwidget.cpp \
            visualmountainfactory.cpp
 
-win32:{
+win32{
     LIBS += -lglu32 -lopengl32
 }
 
