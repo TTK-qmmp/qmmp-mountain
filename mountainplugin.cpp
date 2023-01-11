@@ -35,7 +35,9 @@ MountainPlugin::~MountainPlugin()
 void MountainPlugin::start()
 {
     if(isVisible())
+    {
         m_timer->start();
+    }
 }
 
 void MountainPlugin::stop()
@@ -55,9 +57,13 @@ void MountainPlugin::updateVisual()
 void MountainPlugin::setFullScreen(bool yes)
 {
     if(yes)
+    {
         setWindowState(windowState() | Qt::WindowFullScreen);
+    }
     else
+    {
         setWindowState(windowState() & ~Qt::WindowFullScreen);
+    }
 }
 
 void MountainPlugin::hideEvent(QHideEvent *)
