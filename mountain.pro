@@ -1,6 +1,10 @@
 include($$PWD/common/common.pri)
 
-QT += opengl
+lessThan(QT_MAJOR_VERSION, 6){
+    QT += opengl
+}else{
+    QT += openglwidgets
+}
 
 HEADERS += mountainplugin.h \
            mountainwidget.h \
@@ -24,6 +28,7 @@ contains(CONFIG, BUILD_PLUGIN_INSIDE){
         INSTALLS += target
     }
 }else{
+    QT += widgets
     CONFIG += warn_off plugin lib thread link_pkgconfig c++11
     TEMPLATE = lib
 
