@@ -17,7 +17,11 @@ Visual *VisualMountainFactory::create(QWidget *parent)
     return new MountainPlugin(parent);
 }
 
+#if (QMMP_VERSION_INT < 0x10700) || (0x20000 <= QMMP_VERSION_INT && QMMP_VERSION_INT < 0x20200)
 QDialog *VisualMountainFactory::createConfigDialog(QWidget *parent)
+#else
+QDialog *VisualMountainFactory::createSettings(QWidget *parent)
+#endif
 {
     Q_UNUSED(parent);
     return nullptr;
