@@ -10,11 +10,6 @@ MountainWidget::MountainWidget(QWidget *parent)
     memset(m_bars, 0, sizeof(m_bars));
 }
 
-MountainWidget::~MountainWidget()
-{
-
-}
-
 void MountainWidget::addBuffer(float *left)
 {
     generateLogGraph(left, m_bars[m_offset]);
@@ -33,7 +28,7 @@ void MountainWidget::initializeGL()
 {
     for(int i = 0; i <= NUM_BANDS; ++i)
     {
-        m_logScale[i] = powf(256,(float) i / NUM_BANDS) - 0.5f;
+        m_logScale[i] = powf(256, (float)i / NUM_BANDS) - 0.5f;
     }
 
     for(int y = 0; y < NUM_BANDS; ++y)
