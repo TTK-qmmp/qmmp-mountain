@@ -1,6 +1,6 @@
 #include "mountainwidget.h"
 
-#include <math.h>
+#include <cmath>
 
 MountainWidget::MountainWidget(QWidget *parent)
     : QtOpenGLWidget(parent)
@@ -13,10 +13,10 @@ MountainWidget::MountainWidget(QWidget *parent)
 void MountainWidget::addBuffer(float *left)
 {
     generateLogGraph(left, m_bars[m_offset]);
-    m_offset =(m_offset + 1) % NUM_BANDS;
+    m_offset = (m_offset + 1) % NUM_BANDS;
 
     m_angle += m_angleSpeed;
-    if(m_angle > 45 || m_angle < -45)
+    if(m_angle > 45.0f || m_angle < -45.0f)
     {
         m_angleSpeed = -m_angleSpeed;
     }
@@ -28,7 +28,7 @@ void MountainWidget::initializeGL()
 {
     for(int i = 0; i <= NUM_BANDS; ++i)
     {
-        m_logScale[i] = powf(256, (float)i / NUM_BANDS) - 0.5f;
+        m_logScale[i] = std::pow(256, (float)i / NUM_BANDS) - 0.5f;
     }
 
     for(int y = 0; y < NUM_BANDS; ++y)
@@ -37,7 +37,7 @@ void MountainWidget::initializeGL()
         for(int x = 0; x < NUM_BANDS; ++x)
         {
             const float xf = (float)x / (NUM_BANDS - 1);
-            m_colors[x][y][0] = (1 - xf) *(1 - yf);
+            m_colors[x][y][0] = (1 - xf) * (1 - yf);
             m_colors[x][y][1] = xf;
             m_colors[x][y][2] = yf;
         }
@@ -86,8 +86,8 @@ void MountainWidget::generateLogGraph(const float * freq, float * graph)
     {
         /* sum up values in freq array between m_logScale[i] and m_logScale[i + 1],
            including fractional parts */
-        int a = ceilf(m_logScale[i]);
-        int b = floorf(m_logScale[i + 1]);
+        int a = std::ceil(m_logScale[i]);
+        int b = std::floor(m_logScale[i + 1]);
         float sum = 0;
 
         if(b < a)
@@ -117,7 +117,7 @@ void MountainWidget::generateLogGraph(const float * freq, float * graph)
         sum *=(float) NUM_BANDS / 12;
 
         /* convert to dB */
-        float val = 20 * log10f(sum);
+        float val = 20 * std::log10(sum);
 
         /* scale(-DB_RANGE, 0.0) to(0.0, 1.0) */
         val = 1 + val / DB_RANGE;
