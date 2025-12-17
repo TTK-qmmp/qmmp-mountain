@@ -31,7 +31,6 @@ void VisualMountainFactory::showAbout(QWidget *parent)
 {
     QMessageBox::about(parent, tr("About Mountain Visual Plugin"),
                        tr("Qmmp Mountain Visual Plugin") + "\n" +
-                       tr("This plugin adds Mountain visualization") + "\n" +
                        tr("Written by: Greedysky <greedysky@163.com>"));
 }
 
